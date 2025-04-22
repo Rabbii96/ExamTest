@@ -71,25 +71,68 @@ test.describe("User Course Tests", () => {
 
         await page.waitForLoadState('networkidle');
 
+await page
+      .getByLabel("সংক্ষিপ্ত বর্ণনা")
+      .locator("div")
+      .filter({ hasText: "Exam test" })
+      .nth(4)
+      .click();
+    await page.getByRole("tab", { name: "পরীক্ষা" }).click();
+
+    // Wait for the exams to load and ensure the exam buttons are available
+    await page.waitForSelector(
+      'button:has-text("HSC 2025 Mohasoptaho Higher Math")'
+    );
+
+    // Extract and print the titles of all the exams
+    const examTitles = await page.$$eval("button.grid", (examElements) => {
+      return examElements.map((el) => el.textContent.trim());
+    });
+
+    console.log("All Exam Titles:");
+    examTitles.forEach((title, index) => {
+      console.log(`${index + 1}. ${title}`);
+    });
+    // Wait for the button to be visible
+    await page.waitForSelector(
+      'button:has-text("HSC 2025 Mohasoptaho Higher Math Unlimitedপরীক্ষার সময় 22 Apr, 5:25 PM থেকে 22 Apr, 10:00 PM")'
+    );
+
+    // Click on the button
+    const examButton = await page.locator(
+      'button:has-text("HSC 2025 Mohasoptaho Higher Math Unlimitedপরীক্ষার সময় 22 Apr, 5:25 PM থেকে 22 Apr, 10:00 PM")'
+    );
+    await examButton.click();
+    console.log("Exam started ");
 
 
 
-        // await page.getByRole('link', { name: 'আমার কোর্স' }).click();
-        // await page.getByRole('link', { name: 'Special Math Course Special' }).click();
-        // await page.getByLabel('সংক্ষিপ্ত বর্ণনা').locator('div').filter({ hasText: 'Exam test' }).nth(4).click();
-        // await page.getByRole('tab', { name: 'পরীক্ষা' }).click();
-        // await page.getByRole('button', { name: 'HSC 2025 Mohasoptaho Higher Math Unlimited HSC 2025 Mohasoptaho Higher Math' }).click();
-        // await page.getByRole('button', { name: 'Start Exam' }).click();
-        // await page.getByRole('link', { name: '5', exact: true }).click();
-        // await page.getByRole('link', { name: '7', exact: true }).click();
-        // await page.getByRole('link', { name: '9', exact: true }).click();
-        // await page.getByRole('link', { name: '10', exact: true }).click();
-        // await page.getByRole('link', { name: '11' }).click();
-        // await page.getByRole('button', { name: 'পরবর্তী প্রশ্ন straight' }).click();
-        // await page.getByRole('button', { name: 'পরবর্তী প্রশ্ন straight' }).click();
-        // await page.getByRole('link', { name: '100' }).click();
-        // await page.getByRole('button', { name: 'সাবমিট করো straight' }).click();
-        // await page.getByRole('button', { name: 'হ্যাঁ চাই' }).click();
+
+
+
+
+    
+
+    // Loop through the questions and select options
+    for (let i = 0; i <= 99; i++) {
+      
+      console.log(`Answering question ${i}...`);
+
+      const questionLocator = page.locator(`div.question-${i}`); 
+      const options = await questionLocator.locator(
+        'input[type="radio"], input[type="checkbox"]'
+      ); 
+      await options.first().click(); 
+      await page
+        .getByRole("button", { name: "পরবর্তী প্রশ্ন straight" })
+        .click();
+      await page.waitForSelector(`div.question-${i + 1}`);
+    }
+    await page.getByRole("button", { name: "সাবমিট করো straight" }).click();
+    await page.getByRole("button", { name: "হ্যাঁ চাই" }).click();
+    console.log("Exam completed and submitted!");
+
+
 
     });
 });
