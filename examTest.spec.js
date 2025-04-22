@@ -71,5 +71,25 @@ test.describe("User Course Tests", () => {
 
         await page.waitForLoadState('networkidle');
 
+
+
+
+        // await page.getByRole('link', { name: 'আমার কোর্স' }).click();
+        // await page.getByRole('link', { name: 'Special Math Course Special' }).click();
+        // await page.getByLabel('সংক্ষিপ্ত বর্ণনা').locator('div').filter({ hasText: 'Exam test' }).nth(4).click();
+        // await page.getByRole('tab', { name: 'পরীক্ষা' }).click();
+        // await page.getByRole('button', { name: 'HSC 2025 Mohasoptaho Higher Math Unlimited HSC 2025 Mohasoptaho Higher Math' }).click();
+        // await page.getByRole('button', { name: 'Start Exam' }).click();
+        // await page.getByRole('link', { name: '5', exact: true }).click();
+        // await page.getByRole('link', { name: '7', exact: true }).click();
+        // await page.getByRole('link', { name: '9', exact: true }).click();
+        // await page.getByRole('link', { name: '10', exact: true }).click();
+        // await page.getByRole('link', { name: '11' }).click();
+        // await page.getByRole('button', { name: 'পরবর্তী প্রশ্ন straight' }).click();
+        // await page.getByRole('button', { name: 'পরবর্তী প্রশ্ন straight' }).click();
+        // await page.getByRole('link', { name: '100' }).click();
+        // await page.getByRole('button', { name: 'সাবমিট করো straight' }).click();
+        // await page.getByRole('button', { name: 'হ্যাঁ চাই' }).click();
+
     });
 });
